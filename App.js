@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { Header } from "./src/components/Header";
 import { Search } from "./src/components/Search";
 import { CategoryItem } from "./src/components/CategoryItem";
+import Categories from "./src/components/Categories";
 
 
 export default function App() {
@@ -35,30 +36,13 @@ export default function App() {
   ];
 const [term, setTerm] = useState("Burger");
   return (
-    <View style={styles.container}>
+    <View>
       <Header />
       <Search setTerm={setTerm}/>
-      <FlatList
-        data={commonCategories}
-        renderItem={({ item, index }) => {
-          return (
-            <CategoryItem name={item.name} source={item.source} index={index} active={item.name === term} handlePress={() => setTerm(item.name)}/>
-          );
-        }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(category) => category.name}
-      />
+      <Categories categories={commonCategories} setTerm={setTerm}  term={term}/>
       <StatusBar />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: "#fff",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
-});
+
